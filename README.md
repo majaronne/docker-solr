@@ -21,4 +21,4 @@ RUN sed "s/<\!-- <Valve \(.*\) -->$/<Valve \1/" -i /etc/tomcat7/Catalina/localho
 docker exec <CONTRAINER> /opt/backup > dump.tar.bz2
 
 # Restore backup
-docker exec <CONTAINER> /opt/restore < dump.tar.bz2
+docker exec -i <CONTAINER> /opt/restore < dump.tar.bz2
