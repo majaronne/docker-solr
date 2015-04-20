@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#export http_proxy=http://172.17.42.1:3142/
+function update_apt() {
+  apt-get update
+}
+
+if [ "$1" == "dist-upgrade" ]; then
+  update_apt
+elif [ "$1" == "upgrade" ]; then
+  update_apt
+elif [ "$1" == "update" ]; then
+  update_apt
+  exit
+elif [ $( ls /var/lib/apt/lists/ | wc -l) -eq 0 ]; then
+  # No package list files exits, update required
+  update_apt
+elif [ $(( $(date +%s) -  $(date -r /var/lib/apt/lists/ +%s) )) -gt $(( 24*3600 )) ]; then
+  # Package lists are too old, update required
+  update_apt
+fi
+
+apt-get $*

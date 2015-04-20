@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -a;
+
+exec /usr/local/bin/catalina.sh run

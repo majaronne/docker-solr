@@ -1,0 +1,5 @@
+#!/bin/bash
+
+trap "sv start tomcat7" EXIT
+
+cd /usr/share/solr/node/solr && sv stop tomcat7 > /dev/null && tar -cj */data/
