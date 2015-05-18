@@ -1,5 +1,15 @@
 #!/bin/bash
 
-trap "sv start tomcat7" EXIT
+trap "[ -d '/tmp/backup' ] && rm -rf '/tmp/backup'; sv start tomcat7 > /dev/null" EXIT
 
-cd /usr/share/solr/node/solr && sv stop tomcat7 > /dev/null && tar -cj */data/
+sv stop tomcat7 > /dev/null
+if [ -d /tmp/backup ]; then
+  rm -rf /tmp/backup || exit 255
+fi
+
+mkdir -p /tmp/backup && cd $_ || exit 255
+
+cp -a /usr/share/solr/node/solr/* /tmp/backup/ || exit 255
+sv start tomcat7 > /dev/null || exit 255
+
+tar -c */data/ | bzip2 -1
