@@ -5,7 +5,7 @@ source "/etc/default/tomcat7";
 export CATALINA_HOME="/usr/share/tomcat7";
 export CATALINA_BASE="/var/lib/tomcat7";
 
-javamem=$(( $(cat /proc/meminfo|grep MemTotal: | awk '{ print $2 }') / 1024 * 90 / 100 ))
+javamem=$(( $(cat /proc/meminfo|grep MemTotal: | awk '{ print $2 }') / 1024 * ${SOLR_MEMORY_PERCENT:-90} / 100 ))
 export JAVA_OPTS=" \
   -XX:+UseG1GC \
   -XX:+PerfDisableSharedMem \
