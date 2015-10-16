@@ -1,21 +1,28 @@
-# Base docker image for solr-4x + tomcat7
+# Base docker image for solr-5x
 
 ```bash
   docker build -t nota/solr .
 ```
 
-To use this base your own image on this and add you collections:
-/usr/share/solr/nota/
+To use this base your own image on this and add you collections to: 
+/opt/solr/server/solr/
 
 Example Dockerfile for image:
 ```
-FROM nota/solr:4.10.4
+FROM nota/solr:latest
 
-ADD solr/collections /usr/share/solr/nota/
-
-# Reenable IP-limit for solr
-RUN sed "s/<\!-- <Valve \(.*\) -->$/<Valve \1/" -i /etc/tomcat7/Catalina/localhost/solr.xml
+COPY solr/collections /opt/solr/server/solr
 ```
+
+If you need IP-limiting, stick to the solr4 version for now.
+
+# Starting and stopping
+The solr server comes with its own server now. Unfortunately, the start
+and stop commands don't play nice the runit (sv command).
+
+Instead, the server is started by the init system (from a script in 
+/etc/my_init.d). If you need to start and stop it, use /opt/start-solr.sh
+and /opt/stop-solr.sh.
 
 # Create a backup
 docker exec <CONTRAINER> /opt/backup > dump.tar.bz2

@@ -1,5 +1,5 @@
 #!/bin/bash
 
-trap "sv start tomcat7" EXIT
+trap "/opt/start-solr.sh" EXIT
 
-sv stop tomcat7 > /dev/null && tar -C /usr/share/solr/node/solr -xj < /dev/stdin
+/opt/stop-solr.sh > /dev/null && tar -C /opt/solr/server/solr -xj < /dev/stdin

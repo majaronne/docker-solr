@@ -1,5 +1,0 @@
-<Context docBase="/usr/share/solr/node/solr/solr.war" debug="1" crossContext="true">
-  <Environment name="solr/home" type="java.lang.String" value="/usr/share/solr/node/solr" override="true" />
-  <!-- If you want to limit access to solr to docker, other docker container and the solr container uncommand the line below -->
-  <!-- <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="127\.0\.0\.1||::1|0:0:0:0:0:0:0:1|172\.17\.42\.1|172\.167\.1\.\d+" /> -->
-</Context>
