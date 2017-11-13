@@ -1,3 +1,3 @@
 #!/bin/bash
 
-/opt/solr/bin/solr start -p 8080
+/opt/solr/bin/solr start -force -p 8080

@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.16
+FROM phusion/baseimage:0.9.19
 
 # Docker-apt wraps apt and makes sure that indexes are up-to-date then we install packages
 COPY docker-apt /usr/local/bin/
@@ -10,11 +10,11 @@ WORKDIR /opt
 
 # Install software
 RUN docker-apt dist-upgrade -y 
-RUN docker-apt install -y unzip wget at openjdk-7-jre-headless lsof && \
+RUN docker-apt install -y apt-utils unzip wget at openjdk-8-jre-headless lsof && \
   docker-apt clean
 
 # Get and install Solr:
-ENV SOLR_VERSION 5.3.1
+ENV SOLR_VERSION 6.6.2
 RUN wget http://archive.apache.org/dist/lucene/solr/${SOLR_VERSION}/solr-${SOLR_VERSION}.tgz
 RUN tar xzf solr-${SOLR_VERSION}.tgz
 RUN ln -s /opt/solr-${SOLR_VERSION} /opt/solr
